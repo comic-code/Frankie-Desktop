@@ -1,0 +1,61 @@
+:root {
+  --primary: #BFC9F4;
+  --background: #282a36;
+  --gray: #44475a; 
+  --white: #f2f2f2;
+  --thin-blue: #BFC9F4;
+  --blue: #6272a4; 
+  --purple: #bd93f9;
+  --pink: #ff79c6;
+  --red: #f23; 
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--pink);
+  border-radius: 3px;
+}
+ 
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: 0.3s;
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 600;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
+
+input {
+  border-radius: 5px;
+  border: none;
+  height: 1.75rem;
+  font-size: 1rem;
+  padding-left: 0.5rem;
+  border: 1px solid var(--primary);
+  outline: none;
+}
+
+input:focus {
+  box-shadow: 0 0 5px var(--blue);
+}
