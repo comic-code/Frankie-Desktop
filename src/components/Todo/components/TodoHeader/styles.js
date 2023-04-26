@@ -33,6 +33,7 @@ export const SearchResponse = styled.div`
   left: 0;
   width: 100%;
   overflow-y: auto;
+  z-index: 1;
   
   span {
     color: var(--background);
@@ -75,4 +76,88 @@ export const SearchResponse = styled.div`
     animation: ${fadeAnimation} 0.3s ease-in-out;
     z-index: 2;
   }
+`
+
+export const BooksHeaderWrapper = styled(HeaderWrapper)`
+  h1 {
+    color: var(--background);
+  }
+  button {
+    margin-left: auto;
+    border-radius: 0.25rem;
+    font-size: 1.5rem;
+  }
+`
+
+export const NewBook = styled.section`
+  padding: ${props => props.opened ? '0.5rem' : 0};
+  background-color: var(--primary);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  height: ${props => props.opened ? '200px' : 0};
+  z-index: 1;
+  transition: 0.3s;
+  overflow-y: hidden;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  
+    &.left {
+      margin-right: 0.5rem;
+      
+      img {
+        border: 2px solid var(--pink);
+        min-width: 6rem;
+        max-width: 6rem;
+        max-height: 9rem;
+        text-align: center;
+        border-radius: 0.5rem;
+      }
+
+      span.coverInvalid {
+        border: 2px solid var(--pink);
+        min-width: 6rem;
+        max-width: 6rem;
+        height: 9rem;
+        max-height: 9rem;
+        text-align: center;
+        border-radius: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--background);
+        font-weight: bold;
+      }
+
+      select {
+        margin-top: auto;
+        height: 1.75rem;
+      }
+    }
+  }
+
+  div > label {
+    font-weight: bold;
+    color: var(--background);
+    input {
+      margin-bottom: 0.25rem;
+      border-radius: 0.3rem;
+    }
+  }
+
+  span {
+    display: flex;
+    margin-top: auto;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem;
+    background: var(--pink);
+  }
+  
 `

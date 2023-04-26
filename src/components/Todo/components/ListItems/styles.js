@@ -3,57 +3,71 @@ import styled from "styled-components";
 export const ListItemsWrapper = styled.ul`
   margin: 0.5rem 0;
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   height: calc(100vh - 4px - 1rem - 2.2rem);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  
-  li {
+`
+
+export const ItemWrapper = styled.li`
+  display: flex;
+  padding: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  background-color: ${props => props.editing ? '#fff4' : 'var(--background)'};
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--purple);
+  }
+
+  > div {
     display: flex;
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid var(--purple);
-    }
-
-    > div {
-      display: flex;
-      flex-direction: column;
+    flex-direction: column;
      
-      div.row {
-        display: flex;
-        align-items: center;
+    div.row {
+      display: flex;
+      align-items: center;
 
-        img {
-          width: 1.9rem;
-          cursor: pointer;
-          transition: 0.2s;
-          margin-right: 5px;
-          &:hover {
-            filter: brightness(1.1);
-          }
-        }
-
-        span.rating {
-          border-left: 2px solid var(--purple);
-          padding-left: 0.25rem;;
+      img {
+        width: 1.9rem;
+        transition: 0.2s;
+        margin-right: 5px;
+        &:hover {
+          filter: ${props => props.editing ? 'brightness(1.1)' : 'none'};
         }
       }
+      span.rating {
+        border-left: 2px solid var(--purple);
+        padding-left: 0.25rem;;
+      }
 
-      > span {
-        margin-bottom: 0.25rem;
-        
+      select {
+        /* width: 100%; */
+        height: 100%;
+        font-size: 1rem;
       }
     }
 
-    img {
-      width: 3.5rem;
-      border-radius: 5px;
-      margin-right: 0.5rem;
+    > span {
+      margin-bottom: 0.25rem;
+      
     }
-    color: #fff;
+  }
+
+  img {
+    width: 3.5rem;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+  }
+  color: #fff;
+  
+  button {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background-color: var(--pink);
+    padding: 0 0.5rem
   }
 `

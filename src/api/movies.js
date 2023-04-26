@@ -20,8 +20,8 @@ export async function newMovie(movie) {
   return response.data;
 }
 
-export async function ratingMovie(movieId, rating) {
-  const response = await axios.put('/movies', {movieId, rating});
+export async function editMovie(movieId, done, rating) {
+  const response = await axios.put('/movies', {movieId, done, rating});
   return response.status === 200;
 } 
 

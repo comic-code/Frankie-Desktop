@@ -6,7 +6,7 @@ export const TodoFilterWrapper = styled.footer`
   right: 0;
   background: var(--primary);
   border-top-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border-bottom-right-radius: 0.7rem;
   display: flex;
 
   button {
@@ -21,7 +21,7 @@ export const TodoFilterWrapper = styled.footer`
     &:first-child {
       border-top-left-radius: 1rem;
     }
-
+    
     &:last-child {
       border-bottom-right-radius: 1rem;
     }
