@@ -4,7 +4,7 @@ import { getGameGenres, getGames } from './api/games';
 import { getMovieGenres, getMovies } from './api/movies';
 import { getSerieGenres, getSeries } from './api/series';
 import { getBooks } from './api/books';
-
+import { getAlexa } from './api/alexa';
 
 export const GlobalContext = createContext({});
 export default function GlobalProvider({ children }) {
@@ -12,6 +12,7 @@ export default function GlobalProvider({ children }) {
   const [movies, setMovies] = useState([]);
   const [games, setGames] = useState([]);
   const [books, setBooks] = useState([]);
+  const [alexaIsConnected, setAlexaIsConnected] = useState(false);
   const [series, setSeries] = useState([]);
   const ratings = [
     "0.0 / 5.0 ⭐️", "0.5 / 5.0 ⭐️", "1.0 / 5.0 ⭐️", "1.5 / 5.0 ⭐️", "2.0 / 5.0 ⭐️", "2.5 / 5.0 ⭐️",
@@ -20,7 +21,7 @@ export default function GlobalProvider({ children }) {
   let movieGenres = [];
   let gameGenres = [];
   let serieGenres = [];
-  let booksGenres = ['Aventura', 'Biografia', 'Comédia', 'Fantasia', 'Ficção Científica', 'Terror', 'Mistério', 'Policia', 'Romance'];
+  let booksGenres = ['Aventura', 'Biografia', 'Comédia', 'Drama', 'Fantasia', 'Ficção Científica', 'Terror', 'Mistério', 'Romance', 'Romance de amor'];
 
   useEffect(() => {
     getMovieGenres().then(result => movieGenres = result);
@@ -34,6 +35,7 @@ export default function GlobalProvider({ children }) {
 
     getBooks().then(books => setBooks(books));
 
+    getAlexa().then(alexa => setAlexaIsConnected(alexa.connected));
   }, []);
 
   return (
@@ -43,8 +45,8 @@ export default function GlobalProvider({ children }) {
         movies, setMovies, movieGenres,
         games, setGames, gameGenres,
         series, setSeries, serieGenres,
-        books, setBooks, booksGenres,
-        ratings
+        books, setBooks, booksGenres, ratings,
+        alexaIsConnected, setAlexaIsConnected
       }}
     >
       {children}

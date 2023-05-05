@@ -24,15 +24,18 @@ const defaultWindow = {
 let navWindow = null;
 let configWindow = null;
 let todoWindow = null;
+let alexaWindow = null;
 
 function createWindow(windowType = 'nav') {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   const isConfigWindow = windowType === 'config';
   const isTodoWindow = windowType === 'todo';
+  const isAlexaWindow = windowType === 'alexa';
 
   const windowOptions = 
     isConfigWindow ? { ...defaultWindow, title: 'Frankie - Configuração', y: height, height: 300 }
     : isTodoWindow ? { ...defaultWindow,title: 'Frankie - A Fazer', }
+    : isAlexaWindow ? { ...defaultWindow,title: 'Frankie - Alexa', y: height, width:300, height: 108}
     : { ...defaultWindow, x: (width - 300) / 2, width: 300, height: 54 };
 
   const windowURL = isDev
@@ -41,7 +44,8 @@ function createWindow(windowType = 'nav') {
   
   const existingWindow  = 
     isConfigWindow ? configWindow 
-    : isTodoWindow ? todoWindow 
+    : isTodoWindow ? todoWindow
+    : isAlexaWindow ? alexaWindow
     : navWindow;
     
   if (existingWindow) {
@@ -53,6 +57,8 @@ function createWindow(windowType = 'nav') {
       configWindow = newWindow;
     } else if(isTodoWindow) {
       todoWindow = newWindow;
+    } else if(isAlexaWindow) {
+      alexaWindow = newWindow;
     } else {
       navWindow = newWindow;
     }

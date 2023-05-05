@@ -1,70 +1,42 @@
-import { useEffect, useState } from 'react';
-import { TodoContainer } from './styles';
+import { useContext, useEffect, useState } from 'react';
+import { AlexaContainer, AlexaIsDisconnected } from './styles';
+import { GlobalContext } from '../../GlobalContext';
 
-import IconGames from '../../assets/icons/icon-games.png';
-import IconMovies from '../../assets/icons/icon-movies.png';
-import IconSeries from '../../assets/icons/icon-series.png';
-import IconBooks from '../../assets/icons/icon-books.png';
-import TodoHeader from './components/TodoHeader';
-import ListItems from './components/ListItems';
-import TodoFilter from './components/TodoFilter';
-import ClickedItem from './components/ClickedItem';
-import BooksHeader from './components/TodoHeader/BooksHeader';
+import FreeTextGames from '../../assets/icons/alexa/icon-free-text.png';
+import LightMovies from '../../assets/icons/alexa/icon-light.png';
+import IconSpotify from '../../assets/icons/alexa/icon-spotify.png';
+import IconSay from '../../assets/icons/alexa/icon-say.png';
+import IconReminder from '../../assets/icons/alexa/icon-reminder.png';
+import AlexaDisconnected from './components/AlexaDisconnected';
+import AlexaLight from './components/AlexaLight';
 
-export default function Todo() {
+export default function Alexa() {
   const items = [
-    {label: 'movie', icon: IconMovies},
-    {label: 'serie', icon: IconSeries},
-    {label: 'game', icon: IconGames},
-    {label: 'book', icon: IconBooks},
+    {label: 'light', icon: LightMovies},
+    {label: 'spotify', icon: IconSpotify},
+    {label: 'free-text', icon: FreeTextGames},
+    {label: 'reminder', icon: IconReminder},
+    {label: 'say', icon: IconSay},
   ];
-
   const [selected, setSelected] = useState(items[0].label);
-  const [filter, setFilter] = useState('all');
-  const [searchResponse, setSearchResponse] = useState(null);
-  const [showSearchResponse, setShowSearchResponse] = useState(false);
-  const [clickedItem, setClickedItem] = useState(null);
-  
-  function cleanWindow() {
-    setSearchResponse(null);
-    setShowSearchResponse(null);
-    setClickedItem(null);
-  }
-
-  useEffect(() => {
-    cleanWindow();
-  }, [selected]);
-
-  useEffect(() => {
-    function handleKeyDown(e) {e.key === 'Escape' && cleanWindow()};
-    window.addEventListener('keydown', handleKeyDown);
-    window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  const { alexaIsConnected, setAlexaIsConnected } = useContext(GlobalContext)
 
   return (
-    <TodoContainer>
-      <aside>
-        {items.map(item => 
-          <button key={item.label} className={selected === item.label ? 'active' : ''} onClick={() => setSelected(item.label)}>
-            <img src={item.icon} alt="" />  
+    <AlexaContainer>
+      {!alexaIsConnected 
+        ? <AlexaDisconnected />
+        : selected === 'light' ? <AlexaLight /> : ''
+      }
+      <main>
+        {items.map((item, index) =>
+          <button key={index}
+             className={selected === item.label ? 'active' : ''}
+             onClick={() => setSelected(item.label)} 
+          >
+            <img src={item.icon} alt={item.label} />
           </button>
         )}
-      </aside>
-      <main>
-        {selected === 'book'
-          ? <BooksHeader />
-          : <TodoHeader 
-              selected={selected} setClickedItem={setClickedItem}
-              searchResponse={searchResponse} setSearchResponse={setSearchResponse} 
-              showSearchResponse={showSearchResponse} setShowSearchResponse={setShowSearchResponse}
-            />
-        }
-        <ListItems selected={selected} filter={filter} />
-        {clickedItem && 
-          <ClickedItem item={clickedItem} setItem={setClickedItem} type={selected} cleanWindow={cleanWindow} />
-        }
-        <TodoFilter filter={filter} setFilter={setFilter} />
       </main>
-    </TodoContainer>
+    </AlexaContainer>
   )
 }

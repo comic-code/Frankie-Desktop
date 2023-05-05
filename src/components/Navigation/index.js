@@ -14,7 +14,7 @@ export default function Navigation() {
     {label: 'Configurações', icon: IconSettings, route: 'config'},
     // {label: 'Zap', icon: IconZap, route: 'whatsapp'},
     // {label: 'RPG', icon: IconRPG, route: 'rpg'},
-    // {label: 'Alexa', icon: IconAlexa, route: 'alexa'},
+    {label: 'Alexa', icon: IconAlexa, route: 'alexa'},
     {label: 'A Fazer', icon: IconTodo, route: 'todo'},
   ];
 
