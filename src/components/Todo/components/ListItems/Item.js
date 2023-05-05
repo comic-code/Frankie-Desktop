@@ -38,8 +38,8 @@ export default function Item({item, editing, setEditing, save}) {
               </select>
             : <span className='rating'>{item.rating || 'Sem Nota'}</span>
           }
+          {editing && <button onClick={() => save(check, rate)}>Salvar</button>}
         </div>
-        {editing && <button onClick={() => save(check, rate)}>Salvar</button>}
       </div>
     </ItemWrapper>
   )

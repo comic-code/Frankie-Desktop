@@ -44,7 +44,6 @@ export const ItemWrapper = styled.li`
       }
 
       select {
-        /* width: 100%; */
         height: 100%;
         font-size: 1rem;
       }
@@ -64,9 +63,7 @@ export const ItemWrapper = styled.li`
   color: #fff;
   
   button {
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
+    margin-left: 1rem;
     background-color: var(--pink);
     padding: 0 0.5rem
   }

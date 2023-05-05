@@ -7,9 +7,9 @@ import { searchSerie } from '../../../../api/series';
 
 export default function TodoHeader(
   {selected, showSearchResponse, setShowSearchResponse, searchResponse, setSearchResponse, setClickedItem} ) {
-  let label = selected === 'game' ? 'o Jogo' 
-            : selected === 'movie' ? 'o Filme'
-            : selected === 'serie' && 'a Série'
+  let label = selected === 'game' ? 'Novo Jogo' 
+            : selected === 'movie' ? 'Novo Filme'
+            : selected === 'serie' && 'Nova Série'
 
   const [searchText, setSearchText] = useState('');
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -35,7 +35,7 @@ export default function TodoHeader(
 
   return (
     <HeaderWrapper onSubmit={handleSearch}>
-      <input placeholder={'Digite ' + label} 
+      <input placeholder={label} 
         value={searchText} onChange={e => setSearchText(e.target.value)}
       />
       <button>Buscar</button>

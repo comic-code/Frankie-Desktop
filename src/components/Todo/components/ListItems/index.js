@@ -6,7 +6,7 @@ import { ListItemsWrapper } from "./styles";
 import { editMovie } from "../../../../api/movies";
 import { editBook } from "../../../../api/books";
 
-export default function ListItems({selected, filter}) {
+export default function ListItems({selected, filter, filterName}) {
   const { movies, setMovies, games, setGames, series, setSeries, books, setBooks } = useContext(GlobalContext);
   const [selectedItems, setSelectedItems] = useState([]);
   const [editingItem, setEditingItem] = useState(null);
@@ -47,7 +47,7 @@ export default function ListItems({selected, filter}) {
     <ListItemsWrapper>
       {selectedItems.map(item => {
         const match = 
-          filter === 'all' ? true
+          filter === 'all' ? !filterName ? true : item.name.includes(filterName) 
           : filter === 'to-do' ? !item.done 
           : item.done
         

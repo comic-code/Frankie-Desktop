@@ -21,6 +21,7 @@ export default function Todo() {
 
   const [selected, setSelected] = useState(items[0].label);
   const [filter, setFilter] = useState('all');
+  const [filterName, setFilterName] = useState('');
   const [searchResponse, setSearchResponse] = useState(null);
   const [showSearchResponse, setShowSearchResponse] = useState(false);
   const [clickedItem, setClickedItem] = useState(null);
@@ -29,6 +30,7 @@ export default function Todo() {
     setSearchResponse(null);
     setShowSearchResponse(null);
     setClickedItem(null);
+    setFilterName('');
   }
 
   useEffect(() => {
@@ -36,9 +38,13 @@ export default function Todo() {
   }, [selected]);
 
   useEffect(() => {
+    setFilter('all');
+  }, [filterName])
+
+  useEffect(() => {
     function handleKeyDown(e) {e.key === 'Escape' && cleanWindow()};
     window.addEventListener('keydown', handleKeyDown);
-    window.removeEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   return (
@@ -59,11 +65,14 @@ export default function Todo() {
               showSearchResponse={showSearchResponse} setShowSearchResponse={setShowSearchResponse}
             />
         }
-        <ListItems selected={selected} filter={filter} />
+        <ListItems selected={selected} filter={filter} filterName={filterName} />
         {clickedItem && 
           <ClickedItem item={clickedItem} setItem={setClickedItem} type={selected} cleanWindow={cleanWindow} />
         }
-        <TodoFilter filter={filter} setFilter={setFilter} />
+        <TodoFilter selected={selected} 
+          filter={filter} setFilter={setFilter}
+          filterName={filterName} setFilterName={setFilterName}
+        />
       </main>
     </TodoContainer>
   )
