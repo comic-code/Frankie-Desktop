@@ -48,7 +48,7 @@ export default function ListItems({selected, filter, filterName}) {
       <span>{selectedItems.length}</span>
       {selectedItems.map(item => {
         const match =
-          filter === 'all' ? !filterName ? true : item.name.includes(filterName) 
+          filter === 'all' ? !filterName ? true : `${item.name}`.toUpperCase().includes(filterName.toUpperCase()) 
           : filter === 'to-do' ? !item.done 
           : item.done
         
