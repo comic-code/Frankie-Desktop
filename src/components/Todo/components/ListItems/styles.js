@@ -9,6 +9,18 @@ export const ListItemsWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   list-style-type: none;
+
+  > span {
+    position: absolute;
+    right: 0;
+    top: 2rem;
+    padding: 5px;
+    border-bottom-left-radius: 0.5rem;
+    z-index: 2;
+    color: var(--white);
+    background: var(--primary);
+    text-shadow: 1px 1px 1px var(--pink);
+  }
 `
 
 export const ItemWrapper = styled.li`

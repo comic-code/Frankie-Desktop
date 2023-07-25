@@ -17,9 +17,9 @@ export default function ListItems({selected, filter, filterName}) {
                       // : selected === 'serie' ? editSerie
                       : selected === 'book' && editBook;
     const setFunction = selected === 'movie' ? setMovies
-    : selected === 'game' ? setGames
-    : selected === 'serie' ? setSeries
-    : selected === 'book' && setBooks;
+                      : selected === 'game' ? setGames
+                      : selected === 'serie' ? setSeries
+                      : selected === 'book' && setBooks;
 
     editSubmit(editingItem.id, check, rate).then(() => {
       setFunction(old => old.map(item => {
@@ -45,8 +45,9 @@ export default function ListItems({selected, filter, filterName}) {
 
   return (
     <ListItemsWrapper>
+      <span>{selectedItems.length}</span>
       {selectedItems.map(item => {
-        const match = 
+        const match =
           filter === 'all' ? !filterName ? true : item.name.includes(filterName) 
           : filter === 'to-do' ? !item.done 
           : item.done
